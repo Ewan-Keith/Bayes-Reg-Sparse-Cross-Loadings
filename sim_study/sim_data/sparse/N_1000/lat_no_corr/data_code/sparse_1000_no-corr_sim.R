@@ -1,7 +1,7 @@
 #### data simulation for Using Bayesian regularisation to systematically estimate sparse cross-loading solutions
 ## Cross-Loading Structure: Sparse
 ## samples size: 1000
-## Latent Correlations: Present
+## Latent Correlations: Not Present
 
 library(simsem)
 
@@ -60,15 +60,6 @@ LY <- bind(loading, loadingValues)
 
 latentCor <- matrix(NA, 3, 3) 
 diag(latentCor) <- 1 # population factor variance of 1
-
-# define latent factor correlations of varying sizes
-latentCor[2,1] <- .2
-latentCor[1,2] <- .2
-latentCor[3,1] <- .3
-latentCor[1,3] <- .3
-latentCor[3,2] <- .4
-latentCor[2,3] <- .4
-
 PS <- binds(latentCor,0) # population correlation of factors = 0
 
 #### define TE  as the measurement error correlation among indicators ####
@@ -93,6 +84,6 @@ for(i in 1:n_data){
   temp_data <- generate(CFA.Model, n = 1000)
   
   write.csv(temp_data, 
-            file = paste0("sim_study/sim_data/sim_data_output/sparse/N_1000/lat_corr/sparse_1000_corr_file", i, ".csv"),
+            file = paste0("sim_study/sim_data/sparse/N_1000/lat_no_corr/data_output/sparse_1000_no-corr_file", i, ".csv"),
             row.names=FALSE)
 }

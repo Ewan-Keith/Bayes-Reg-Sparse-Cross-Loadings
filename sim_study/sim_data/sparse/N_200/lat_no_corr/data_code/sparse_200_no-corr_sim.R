@@ -1,6 +1,6 @@
 #### data simulation for Using Bayesian regularisation to systematically estimate sparse cross-loading solutions
 ## Cross-Loading Structure: Sparse
-## samples size: 1000
+## samples size: 200
 ## Latent Correlations: Not Present
 
 library(simsem)
@@ -81,9 +81,9 @@ set.seed(456789)
 
 for(i in 1:n_data){
   
-  temp_data <- generate(CFA.Model, n = 1000)
+  temp_data <- generate(CFA.Model, n = 200)
   
   write.csv(temp_data, 
-            file = paste0("sim_study/sim_data/sim_data_output/sparse/N_1000/lat_no_corr/sparse_1000_no-corr_file", i, ".csv"),
+            file = paste0("sim_study/sim_data/sparse/N_200/lat_no_corr/data_output/sparse_200_no-corr_file", i, ".csv"),
             row.names=FALSE)
 }

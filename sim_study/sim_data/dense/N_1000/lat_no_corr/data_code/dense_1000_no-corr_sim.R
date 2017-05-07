@@ -86,7 +86,12 @@ for(i in 1:n_data){
   
   temp_data <- generate(CFA.Model, n = 1000)
   
-  write.csv(temp_data, 
-            file = paste0("sim_study/sim_data/dense/N_1000/lat_no_corr/data_output/dense_1000_no-corr_file", i, ".csv"),
-            row.names=FALSE)
+  out_list <- list(N = 1000,
+                   P = 15,
+                   D = 3,
+                   C = 30,
+                   X = as.matrix(temp_data))
+  
+  saveRDS(out_list, 
+          file = paste0("sim_study/sim_data/dense/N_1000/lat_no_corr/data_output/dense_1000_no-corr_file", i, ".rds"))
 }

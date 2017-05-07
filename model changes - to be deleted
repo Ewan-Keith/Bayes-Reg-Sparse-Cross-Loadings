@@ -1,0 +1,64 @@
+model changes:
+
+----------------------------------------------------------
+Change item-residual variance prior from U(0, 100) to C+(0, 2)
+
+CHANGE THIS:
+vector<lower=0,upper=100>[P] var_p; // sd for each variable, vector
+TO THIS:
+vector<lower=0>[P] var_p; // sd for each variable, vector
+
+ADD THIS TO THE SPECIFIED PRIORS
+var_p ~ cauchy(0, 2)
+
+-------------------------------------------------------
+change intercept prior from N(0, 3) to N(0, 1)
+
+CHANGE THIS:
+b ~ normal(0, 3);
+TO THIS:
+b ~ normal(0, 1);
+
+-------------------------------------------------------
+change main loading prior from the funny hierarchical version to N(0, 1)
+
+CHANGE THIS:
+lam ~ normal(0, var_f);
+TO THIS:
+lam ~ normal(0, 1);
+
+DELETE THIS:
+vector<lower=0,upper=100>[P] var_f; // sd for each main factor loading, vector
+
+------------------------------------------------------------
+change the factor score matrix to a true matrix object
+
+CHANGE THIS:
+vector[D] FS[N]; // factor scores, matrix of order [N,D]
+TO THIS:
+matrix[N, D] FS; // factor scores, matrix of order [N,D]
+
+------------------------------------------------------------
+change the raw data matrix to a true matrix object
+
+CHANGE THIS:
+vector[P] X[N]; // data matrix of order [N,P]
+TO THIS:
+matrix[N, P] X; // data matrix of order [N,P]
+
+------------------------------------------------------------
+Add a main loading matrix 
+
+ADD THIS:
+matrix[D, P] ML; // Main Loading Matrix
+
+------------------------------------------------------------
+change the item mean score matrix to a true matrix object
+
+CHANGE THIS:
+vector[P] mu[N]; // NxP Matrix where each cell is ind N mean score for var P
+TO THIS:
+matrix[N, P] mu; // NxP Matrix where each cell is ind N mean score for var P
+
+-------------------------------------------------------------
+change body of model to matrix mult version.

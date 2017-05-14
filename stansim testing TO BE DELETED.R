@@ -30,12 +30,12 @@ initf1 <- function() {
        CL = array(0, dim = c(3,15)))
 } 
 
-stan_arg_list <- list(file = 'sim_study/stan_models/small_guassian.stan', 
-     iter = 5000, chains = 4, thin = 5, init = initf1)
+stan_arg_list <- list(file = 'sim_study/stan_models/small_gaussian.stan', 
+     iter = 7000, chains = 4, thin = 5, init = initf1)
 
 data_list <- dir("sim_study/sim_data/dense/N_200/lat_no_corr/data_output", full.names = T)[1:4]
 
-testout <- stan_sim(stan_args = stan_arg_list, sim_data = data_list, loo = FALSE, use_cores = 4, parameters = c("ML", "CL"))
+testout <- stan_sim(stan_args = stan_arg_list, sim_data = data_list, calc_loo = T, use_cores = 4, parameters = c("ML", "CL"))
 
 library(dplyr)
 temp <- testout$data

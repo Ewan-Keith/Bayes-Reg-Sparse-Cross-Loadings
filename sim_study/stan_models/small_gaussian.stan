@@ -18,7 +18,6 @@ transformed parameters{
   matrix[D,D] Ld; // scale-parameter for multi-normal latent variable scores
   vector<lower=0>[P] var_p; // sd for each variable, vector
   matrix[N, D] Ltv_score; // latent variable scores, matrix [N,D]
-  //vector<lower=0>[D] ordering; // positive values to enforce ordering
   
   // transform Ltv_score_vect in to matrix format for use in matrix algebra
   for(i in 1:N) Ltv_score[i,] = to_row_vector(Ltv_score_vect[i]);
@@ -38,13 +37,6 @@ transformed parameters{
   // Equivalent to Ltv_score * full loading matrix. mu is 
   // predicted scores for all individuals on all observed vars.
   mu = (Ltv_score * ML) + (Ltv_score * CL);
-  
-  // value sof ordering are restricted positive. The effect of 
-  // the below is to fix the first main loading of each factor
-  // to be greater than the last.
-  //ordering[1] = ML[1, 1] - ML[1, 5];
-  //ordering[2] = ML[2, 6] - ML[2, 10];
-  //ordering[3] = ML[3, 11] - ML[3, 15];
 }
     
 model{
@@ -135,18 +127,13 @@ model{
     Ltv_score_vect ~ multi_normal_cholesky(rep_vector(0, D), Ld);
 }
 
-//generated quantities {
-//    vector[P] log_lik[N];  // data matrix of order [N,P]
-//    
-//    for(i in 1:N) log_lik[i] = normal_lpdf(X[i] | mu[i], var_p); 	
-//}
+// generate the log-likelihood variable to be used in LOO calculations
+generated quantities {
+    vector[P] log_lik[N];  // log_likelihood matrix of order [N,P]
     
-//generated quantities {
-//    vector[P] log_lik[N];  // data matrix of order [N,P]
-//    
-//    for(n in 1:P){
-//      for (i in 1:N){ 
-//        log_lik[i, n] = normal_lpdf(X[i, n] | mu[i, n], var_p[n]); 	
-//      }
-//    }
-//}
+    for(n in 1:P){
+      for (i in 1:N){ 
+        log_lik[i, n] = normal_lpdf(X[i, n] | mu[i, n], var_p[n]); 	
+      }
+    }
+}

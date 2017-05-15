@@ -8,6 +8,8 @@
 #### load required libraries ####
 ##//////////////////////////////////////////////////////////////////////////////
 
+devtools::install_github("Ewan-Keith/rstansim")
+
 library(rstan)
 # STILL IN DEVELOPMENT, I/O not yet stable so code likely to break in future
 library(rstansim)

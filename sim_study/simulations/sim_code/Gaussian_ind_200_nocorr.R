@@ -1,5 +1,5 @@
 #### modelling for Using Bayesian regularisation to systematically estimate sparse cross-loading solutions
-## Cross-Loading Structure: Sparse
+## Cross-Loading Structure: Independent
 ## samples size: 200
 ## Latent Correlations: Not Present
 ## CL prior Distribution: Gaussian

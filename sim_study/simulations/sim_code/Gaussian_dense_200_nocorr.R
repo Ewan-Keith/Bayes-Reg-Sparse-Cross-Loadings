@@ -1,5 +1,5 @@
 #### modelling for Using Bayesian regularisation to systematically estimate sparse cross-loading solutions
-## Cross-Loading Structure: Independent
+## Cross-Loading Structure: Dense
 ## samples size: 200
 ## Latent Correlations: Not Present
 ## CL prior Distribution: Gaussian
@@ -57,6 +57,6 @@ stansim_out <- stan_sim(stan_args = stan_arg_list,
                         use_cores = 4, 
                         parameters = c("ML", "CL", "Omega"))
 
-saveRDS(stansim_out, "sim_study/simulations/sim_results/Gaussian_ind_200_nocorr_output.rds")
+saveRDS(stansim_out, "sim_study/simulations/sim_results/Gaussian_dense_200_nocorr_output.rds")
 
 

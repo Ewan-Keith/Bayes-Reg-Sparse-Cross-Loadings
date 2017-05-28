@@ -1,5 +1,5 @@
 #### modelling for Using Bayesian regularisation to systematically estimate sparse cross-loading solutions
-## Cross-Loading Structure: Sparse
+## Cross-Loading Structure: Independent
 ## samples size: 200
 ## Latent Correlations: Not Present
 ## CL prior Distribution: Gaussian
@@ -45,7 +45,7 @@ initf1 <- function() {
 stan_arg_list <- list(file = 'sim_study/stan_models/small_gaussian.stan', 
                       iter = 5000, chains = 4, thin = 5, init = initf1)
 
-data_list <- dir("sim_study/sim_data/ind/N_200/lat_no_corr/data_output", full.names = T)
+data_list <- dir("sim_study/sim_data/dense/N_200/lat_no_corr/data_output", full.names = T)
 
 ##//////////////////////////////////////////////////////////////////////////////
 #### run simulation ####
